@@ -1,0 +1,17 @@
+#!/bin/sh
+#init.d script 
+
+START=99 #для надёжности ставим скрипт ближе к концу очереди автозапуска
+STOP=15
+
+start() {
+        echo start
+        # commands to launch application
+        /root/tap_init.sh
+        openvpn --config /root/mc.gl3.ovpn
+}
+
+stop() {
+        echo stop
+        # commands to kill application
+}
