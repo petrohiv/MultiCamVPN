@@ -1,0 +1,24 @@
+#!/bin/bash
+SUBNET="192.168.11."
+rm netscan.log
+touch ping.log netscan.log
+echo subnet $SUBNET"0"
+echo $(date) "scan started" | tee -a netscan.log
+        for i in `seq 2 200`;
+        do
+            #echo item: $i
+            timeout 0.01 ping -c 1 192.168.11.$i > /dev/null 2>&1
+            if [ $? -eq 0 ]; then
+              echo $SUBNET$i >> ping.log #"Ping worked" >> ping.log
+            #else
+            #  echo $SUBNET$i #"Ping failed" >> ping.log
+            fi
+            #echo "ping $i done"
+        done
+        for i in $(cat ping.log);
+        do
+            echo -n $i" " | tee -a netscan.log
+            arp -an | grep $i | grep -ioh '[0-9A-F]\{2\}\(:[0-9A-F]\{2\}\)\{5\}' | tee -a netscan.log
+        done
+echo $(date) "scan done" | tee -a netscan.log
+rm ping.log
