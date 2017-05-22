@@ -1,0 +1,6 @@
+#!/bin/bash
+#OS-independent script for automatic update&reboot
+apt-get update
+apt-get upgrade -y
+apt-get autoclean
+shutdown -r now
