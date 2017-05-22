@@ -1,24 +1,27 @@
-#!/bin/bash
+#!/bin/bash\
+##################################################################
+#This program is made for quick scan of active hosts of VPN subnet
+#Not very flexible though
+##################################################################
 SUBNET="192.168.11."
-rm netscan.log
+rm netscan.log ping.log
 touch ping.log netscan.log
 echo subnet $SUBNET"0"
 echo $(date) "scan started" | tee -a netscan.log
-        for i in `seq 2 200`;
+        for i in `seq 1 254`;
         do
             #echo item: $i
-            timeout 0.01 ping -c 1 192.168.11.$i > /dev/null 2>&1
+            timeout 0.11 ping -c 1 $SUBNET$i > /dev/null 2>&1
             if [ $? -eq 0 ]; then
               echo $SUBNET$i >> ping.log #"Ping worked" >> ping.log
             #else
-            #  echo $SUBNET$i #"Ping failed" >> ping.log
+            #  echo $SUBNET$i >> ping.log #"Ping failed" >> ping.log
             fi
             #echo "ping $i done"
         done
         for i in $(cat ping.log);
         do
             echo -n $i" " | tee -a netscan.log
-            arp -an | grep $i | grep -ioh '[0-9A-F]\{2\}\(:[0-9A-F]\{2\}\)\{5\}' | tee -a netscan.log
+            arp -an | grep $i\) | grep -ioh '[0-9A-Fa-f]\{2\}\(:[0-9A-Fa-f]\{2\}\)\{5\}' | tee -a netscan.log
         done
 echo $(date) "scan done" | tee -a netscan.log
-rm ping.log
