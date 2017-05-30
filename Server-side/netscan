@@ -1,4 +1,4 @@
-#!/bin/bash\
+#!/bin/bash
 ##################################################################
 #This program is made for quick scan of active hosts of VPN subnet
 #Not very flexible though
