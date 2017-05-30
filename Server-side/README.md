@@ -6,5 +6,5 @@ Server-side stuff
   <li>server53tcp.conf - config for OpenVPN-server (53/TCP)</li>
   <li>server53udp.conf - config for OpenVPN-server (53/UDP)</li>
   <li>server443tcp.conf - config for OpenVPN-server (443/TCP)</li>
-  <li>vpnmap.py - Python program which updates content of spreadsheet with VPN fixed hosts according to contents of dhcpd.conf </li>
+  <li>vpnmap.py - Python program which updates content of spreadsheet with VPN fixed hosts list according to contents of dhcpd.conf host declarations</li>
 </ul>
